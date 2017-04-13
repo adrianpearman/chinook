@@ -1,0 +1,54 @@
+album = Album.first
+  - #<Artist id: 1, name: "AC/DC", created_at: "2013-12-29 10:17:33", updated_at: "2014-01-29 22:10:22">
+
+track = Track.last
+ -  #<Track id: 3503, album_id: 347, genre_id: 10, media_type_id: 2, name: "Koyaanisqatsi", composer: "Philip Glass", milliseconds: 206005, bytes: 3305164, unit_price: #<BigDecimal:7fd0efb21ae8,'0.99E0',9(18)>, created_at: "2011-08-08 02:13:19", updated_at: "2014-01-29 22:15:05">
+
+my_playlist = Playlist.find_by(name: "90’s Music")
+ - nil
+
+tracks = Track.find([1, 10, 55])
+ - [#<Track id: 1, album_id: 1, genre_id: 1, media_type_id: 1, name: "For Those About To Rock (We Salute You)", composer: "Angus Young, Malcolm Young, Brian Johnson", milliseconds: 343719, bytes: 11170334, unit_price: #<BigDecimal:7fd0efad80a0,'0.99E0',9(18)>, created_at: "2005-01-03 05:49:26", updated_at: "2014-01-29 22:15:04">, #<Track id: 10, album_id: 1, genre_id: 1, media_type_id: 1, name: "Evil Walks", composer: "Angus Young, Malcolm Young, Brian Johnson", milliseconds: 263497, bytes: 8611245, unit_price: #<BigDecimal:7fd0efad08c8,'0.99E0',9(18)>, created_at: "2005-01-03 05:49:26", updated_at: "2014-01-29 22:14:56">, #<Track id: 55, album_id: 7, genre_id: 1, media_type_id: 1, name: "I Can't Remember", composer: "Jerry Cantrell, Layne Staley", milliseconds: 222955, bytes: 7302550, unit_price: #<BigDecimal:7fd0eed699f0,'0.99E0',9(18)>, created_at: "2011-12-11 19:06:02", updated_at: "2014-01-29 22:14:56">]
+
+Genre.find_each do |a| puts a.name end
+ -  Rock
+    Jazz
+    Metal
+    Alternative & Punk
+    Rock And Roll
+    Blues
+    Latin
+    Reggae
+    Pop
+    Soundtrack
+    Bossa Nova
+    Easy Listening
+    Heavy Metal
+    R&B/Soul
+    Electronica/Dance
+    World
+    Hip Hop/Rap
+    Science Fiction
+    TV Shows
+    Sci Fi & Fantasy
+    Drama
+    Comedy
+    Alternative
+    Classical
+    Opera
+
+Artist.where(name: 'AC/DC')
+ - #<ActiveRecord::Relation [#<Artist id: 1, name: "AC/DC", created_at: "2013-12-29 10:17:33", updated_at: "2014-01-29 22:10:22">]>
+irb(main):008:0> Artist.where(name: 'AC/DC')
+
+Album.where(artist_id: 1).order(created_at: :desc)
+ - #<ActiveRecord::Relation [#<Album id: 4, artist_id: 1, title: "Let There Be Rock", created_at: "2007-10-08 13:05:48", updated_at: "2014-01-29 22:14:02">, #<Album id: 1, artist_id: 1, title: "For Those About To Rock We Salute You", created_at: "2005-01-03 05:49:26", updated_at: "2014-01-29 22:14:02">]>
+
+Playlist.limit(5)
+ - #<ActiveRecord::Relation [#<Playlist id: 1, name: "Music", created_at: "2005-01-17 17:01:12", updated_at: "2014-01-29 22:14:33">, #<Playlist id: 2, name: "Movies", created_at: "2005-04-03 18:24:17", updated_at: "2014-01-29 22:14:33">, #<Playlist id: 3, name: "TV Shows", created_at: "2012-10-25 20:26:42", updated_at: "2014-01-29 22:14:33">, #<Playlist id: 4, name: "Audiobooks", created_at: "2013-03-23 09:58:17", updated_at: "2014-01-29 22:14:33">, #<Playlist id: 5, name: "90’s Music", created_at: "2005-05-15 02:15:16", updated_at: "2014-01-29 22:14:33">]>
+
+Album.count
+ - 347
+
+Track.minimum(:unit_price)
+ - #<BigDecimal:7fd0ee990b80,'0.99E0',9(18)>
